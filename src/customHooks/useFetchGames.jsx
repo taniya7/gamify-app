@@ -3,21 +3,19 @@ import ClientAPI from "../services/ClientAPI";
 import { CanceledError } from "axios";
 
 function useFetchGames() {
-  // creating custom hook to fetch games API data
   const [games, setGames] = useState([]);
   const [error, setError] = useState("");
 
   useEffect(() => {
-    const controller = new AbortController(); // creating instance of 'AbortController()' should be inside 'useEffect()'
+    const controller = new AbortController();
 
-    ClientAPI.get("/games", { signal: controller.signal }) // passing '{ signal: controller.signal }' as property to get request
+    ClientAPI.get("/games", { signal: controller.signal })
       .then((res) => {
         setGames(res.data.results);
         console.log(res.data.results);
       })
       .catch((err) => {
         if (err instanceof CanceledError) {
-          // error catching if it is 'cancelled/aborted' error
           console.log("Cancelled!");
           return;
         }
@@ -25,10 +23,10 @@ function useFetchGames() {
         console.log(err.message);
       });
 
-    return () => controller.abort(); // cleaning up previous API data
+    return () => controller.abort();
   }, []);
 
-  return { games, error }; // returning 'games' and 'error' as objects
+  return { games, error };
 }
 
 export default useFetchGames;
