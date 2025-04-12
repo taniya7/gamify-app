@@ -14,7 +14,6 @@ import { BsGlobe } from "react-icons/bs";
 
 function PlatformIconsList({ iconsList }) {
   const iconMap = {
-    // icon.slug = react_icon_name
     pc: FaWindows,
     playstation: FaPlaystation,
     xbox: FaXbox,
