@@ -6,10 +6,10 @@ import "./index.css";
 import App from "./App.jsx";
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
-    <ChakraProvider theme={theme}>
-      <ColorModeScript initialColorMode={theme.config.initialColorMode} />
-      <App />
-    </ChakraProvider>
-  </StrictMode>
+  // <StrictMode> // 'strictmode' is commented so that loader works fine
+  <ChakraProvider theme={theme}>
+    <ColorModeScript initialColorMode={theme.config.initialColorMode} />
+    <App />
+  </ChakraProvider>
+  // </StrictMode>
 );
