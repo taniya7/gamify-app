@@ -5,12 +5,12 @@ import { CanceledError } from "axios";
 function useFetchGames() {
   const [games, setGames] = useState([]);
   const [error, setError] = useState("");
-  const [isLoading, setLoading] = useState(false); // defining loader using 'useState'
+  const [isLoading, setLoading] = useState(false);
 
   useEffect(() => {
     const controller = new AbortController();
 
-    setLoading(true); // when api is called 'loader' is set 'true'
+    setLoading(true);
     console.log("Loader started");
     ClientAPI.get("/games", { signal: controller.signal })
       .then((res) => {
@@ -26,14 +26,14 @@ function useFetchGames() {
         console.log(err.message);
       })
       .finally(() => {
-        setLoading(false); // when data is fetched 'loader' is set 'false'
+        setLoading(false);
         console.log("Loader ended");
       });
 
     return () => controller.abort();
   }, []);
 
-  return { games, error, isLoading }; // 'isLoading' is returned
+  return { games, error, isLoading };
 }
 
 export default useFetchGames;
