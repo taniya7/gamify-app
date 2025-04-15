@@ -9,25 +9,19 @@ function App() {
     <>
       <Grid
         templateAreas={{ base: `"nav" "main"`, lg: `"nav nav" "aside main"` }}
-        templateColumns={{ base: "1fr", lg: "200px 1fr" }} // giving defined width to 'aside' and allowing 'main' to acquire remaining width
+        templateColumns={{ base: "1fr", lg: "200px 1fr" }}
       >
         <GridItem area="nav">
           <Navbar />
         </GridItem>
 
         <Show above="lg">
-          <GridItem
-            area="aside"
-            paddingTop="15px" // giving common top padding to both aside and main
-          >
+          <GridItem area="aside" paddingTop="15px">
             <GenresList />
           </GridItem>
         </Show>
 
-        <GridItem
-          area="main"
-          paddingTop="15px" // giving common top padding to both aside and main
-        >
+        <GridItem area="main" paddingTop="15px">
           <GameGrid />
         </GridItem>
       </Grid>
