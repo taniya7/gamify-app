@@ -3,7 +3,10 @@ import { Box } from "@chakra-ui/react";
 function GameCardContainer({ children }) {
   return (
     <>
-      <Box width="300px" borderRadius={10} overflow={"hidden"}>
+      <Box
+        borderRadius={10}
+        overflow={"hidden"} // Removing fixed width for responsiveness
+      >
         {children}
       </Box>
     </>

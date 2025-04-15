@@ -3,8 +3,7 @@ import ClientAPI from "../services/ClientAPI";
 import { CanceledError } from "axios";
 
 function useFetchData(endpoint) {
-  // function will take 'endpoint' as parameter which can be "/games" or "/genres"
-  const [data, setData] = useState([]); // fetching particular endpoint data
+  const [data, setData] = useState([]);
   const [error, setError] = useState("");
   const [isLoading, setLoading] = useState(false);
 
@@ -12,7 +11,7 @@ function useFetchData(endpoint) {
     const controller = new AbortController();
 
     setLoading(true);
-    ClientAPI.get(endpoint, { signal: controller.signal }) // calling endpoint
+    ClientAPI.get(endpoint, { signal: controller.signal })
       .then((res) => {
         setData(res.data.results);
         console.log(endpoint, " data : ", res.data.results);
@@ -32,7 +31,6 @@ function useFetchData(endpoint) {
     return () => controller.abort();
   }, []);
 
-  return { data, error, isLoading }; // returning particular endpoint data
+  return { data, error, isLoading };
 }
-
 export default useFetchData;

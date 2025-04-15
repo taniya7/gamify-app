@@ -1,14 +1,25 @@
+import { HStack, Image, List, ListItem, Text } from "@chakra-ui/react";
 import useFetchData from "../customHooks/useFetchData";
+import CropImage from "../services/CropImage";
 
 function GenresList() {
-  const { data } = useFetchData("/genres"); // passing endpoint as "/genres"
+  const { data } = useFetchData("/genres");
   return (
     <>
-      <ul>
+      <List>
         {data.map((genre) => (
-          <li key={genre.id}>{genre.name}</li>
+          <ListItem key={genre.id} paddingY="6px">
+            <HStack>
+              <Image
+                boxSize="45px"
+                borderRadius="5px"
+                src={CropImage(genre.image_background)}
+              />
+              <Text>{genre.name}</Text>
+            </HStack>
+          </ListItem>
         ))}
-      </ul>
+      </List>
     </>
   );
 }
