@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import ClientAPI from "../services/ClientAPI";
 import { CanceledError } from "axios";
 
-function useFetchGames() {
-  const [games, setGames] = useState([]);
+function useFetchGenres() {
+  const [genres, setGenres] = useState([]);
   const [error, setError] = useState("");
   const [isLoading, setLoading] = useState(false);
 
@@ -11,15 +11,14 @@ function useFetchGames() {
     const controller = new AbortController();
 
     setLoading(true);
-    console.log("Loader started");
-    ClientAPI.get("/games", { signal: controller.signal })
+    ClientAPI.get("/genres", { signal: controller.signal })
       .then((res) => {
-        setGames(res.data.results);
-        console.log("Games : ", res.data.results);
+        setGenres(res.data.results);
+        console.log("Genres : ", res.data.results);
       })
       .catch((err) => {
         if (err instanceof CanceledError) {
-          console.log("Cancelled!");
+          console.log("Canceled");
           return;
         }
         setError(err.message);
@@ -27,13 +26,12 @@ function useFetchGames() {
       })
       .finally(() => {
         setLoading(false);
-        console.log("Loader ended");
       });
 
     return () => controller.abort();
   }, []);
 
-  return { games, error, isLoading };
+  return { genres, error, isLoading };
 }
 
-export default useFetchGames;
+export default useFetchGenres;
