@@ -1,11 +1,11 @@
-import useFetchGenres from "../customHooks/useFetchGenres";
+import useFetchData from "../customHooks/useFetchData";
 
 function GenresList() {
-  const { genres } = useFetchGenres();
+  const { data } = useFetchData("/genres"); // passing endpoint as "/genres"
   return (
     <>
       <ul>
-        {genres.map((genre) => (
+        {data.map((genre) => (
           <li key={genre.id}>{genre.name}</li>
         ))}
       </ul>

@@ -2,8 +2,9 @@ import { useEffect, useState } from "react";
 import ClientAPI from "../services/ClientAPI";
 import { CanceledError } from "axios";
 
-function useFetchGames() {
-  const [games, setGames] = useState([]);
+function useFetchData(endpoint) {
+  // function will take 'endpoint' as parameter which can be "/games" or "/genres"
+  const [data, setData] = useState([]); // fetching particular endpoint data
   const [error, setError] = useState("");
   const [isLoading, setLoading] = useState(false);
 
@@ -11,29 +12,27 @@ function useFetchGames() {
     const controller = new AbortController();
 
     setLoading(true);
-    console.log("Loader started");
-    ClientAPI.get("/games", { signal: controller.signal })
+    ClientAPI.get(endpoint, { signal: controller.signal }) // calling endpoint
       .then((res) => {
-        setGames(res.data.results);
-        console.log("Games : ", res.data.results);
+        setData(res.data.results);
+        console.log(endpoint, " data : ", res.data.results);
       })
       .catch((err) => {
         if (err instanceof CanceledError) {
-          console.log("Cancelled!");
+          console.log("Canceled");
           return;
         }
         setError(err.message);
-        console.log(err.message);
+        console.log(endpoint, " error : ", err.message);
       })
       .finally(() => {
         setLoading(false);
-        console.log("Loader ended");
       });
 
     return () => controller.abort();
   }, []);
 
-  return { games, error, isLoading };
+  return { data, error, isLoading }; // returning particular endpoint data
 }
 
-export default useFetchGames;
+export default useFetchData;
