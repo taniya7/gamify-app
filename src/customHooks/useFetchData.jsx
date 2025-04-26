@@ -11,10 +11,8 @@ function useFetchData(endpoint, requestConfig, deps) {
     () => {
       const controller = new AbortController();
 
-      // Axios GET with a params object containing the genre’s ID. Axios serializes that into a query string (e.g ?genres=4) and sends it as a HTTP request.
-      // Backend code filters the games based on genre id and gives filtered games to frontend.
       setLoading(true);
-      ClientAPI.get(endpoint, { signal: controller.signal, ...requestConfig }) // spreading 'requestConfig' object to get updated value
+      ClientAPI.get(endpoint, { signal: controller.signal, ...requestConfig })
         .then((res) => {
           setData(res.data.results);
           console.log(endpoint, " data : ", res.data.results);
@@ -33,12 +31,9 @@ function useFetchData(endpoint, requestConfig, deps) {
 
       return () => controller.abort();
     },
-    deps ? [...deps] : [] // spreading 'deps' array to get updated value only when 'deps' contains a valid value
+    deps ? [...deps] : []
   );
 
   return { data, error, isLoading };
 }
 export default useFetchData;
-
-
-

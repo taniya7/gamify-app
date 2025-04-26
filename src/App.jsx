@@ -15,8 +15,6 @@ function App() {
 
   function handleOnSelectGenre(genre) {
     setSelectedGenre(genre);
-    // React updates state asynchronously. When clicked, it still consoles old value which is 'null'
-    // console.log(selectedGenre);
   }
   return (
     <>
@@ -31,15 +29,14 @@ function App() {
         <Show above="lg">
           <GridItem area="aside" paddingTop="15px">
             <GenresList
-              onSelectGenre={handleOnSelectGenre} // passing 'onSelectGenre' as prop which is a function 'handleOnSelectGenre' to fetch 'genre' value from 'GenreList' component
+              onSelectGenre={handleOnSelectGenre}
+              selectedGenre={selectedGenre} // passing current value of 'selectedGenre' as a prop
             />
           </GridItem>
         </Show>
 
         <GridItem area="main" paddingTop="15px">
-          <GameGrid
-            selectedGenre={selectedGenre} // passing 'selectedGenre' as prop with current value of 'selectedGenre' to 'GameGrid' component
-          />
+          <GameGrid selectedGenre={selectedGenre} />
         </GridItem>
       </Grid>
     </>

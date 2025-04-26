@@ -9,7 +9,8 @@ import {
 import useFetchData from "../customHooks/useFetchData";
 import CropImage from "../services/CropImage";
 
-function GenresList({ onSelectGenre }) {
+function GenresList({ onSelectGenre, selectedGenre }) {
+  // taking 'selectedGenre' as a prop
   const { data, error, isLoading } = useFetchData("/genres");
   return (
     <>
@@ -24,9 +25,10 @@ function GenresList({ onSelectGenre }) {
                 borderRadius="5px"
                 src={CropImage(genre.image_background)}
               />
-              <Button // Changing 'Text' to 'Button' with variant as 'link' for onClick changes
+              <Button
                 variant="link"
-                onClick={() => onSelectGenre(genre)} // passing 'genre' object to prop 'onSelectGenre'
+                onClick={() => onSelectGenre(genre)}
+                fontWeight={genre.id === selectedGenre?.id ? "bold" : "normal"} // highlighting selected genre
               >
                 {genre.name}
               </Button>
