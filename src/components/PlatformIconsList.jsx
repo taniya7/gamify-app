@@ -28,7 +28,7 @@ function PlatformIconsList({ iconsList }) {
     <>
       <HStack marginY={2}>
         {iconsList.map((icon) => (
-          <Icon as={iconMap[icon.slug]} />
+          <Icon key={icon.id} as={iconMap[icon.slug]} />
         ))}
       </HStack>
     </>

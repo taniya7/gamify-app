@@ -3,8 +3,21 @@ import Navbar from "./components/Navbar";
 import GameGrid from "./components/GameGrid";
 import GenresList from "./components/GenresList";
 import "./App.css";
+import { useState, useEffect } from "react";
 
 function App() {
+  const [selectedGenre, setSelectedGenre] = useState(null);
+
+  useEffect(() => {
+    // Current Selected Genre value is consoled, only when 'selectedGenre' value is updated
+    console.log("Current Selected Genre (after update):", selectedGenre);
+  }, [selectedGenre]);
+
+  function handleOnSelectGenre(genre) {
+    setSelectedGenre(genre);
+    // React updates state asynchronously. When clicked, it still consoles old value which is 'null'
+    // console.log(selectedGenre);
+  }
   return (
     <>
       <Grid
@@ -17,12 +30,16 @@ function App() {
 
         <Show above="lg">
           <GridItem area="aside" paddingTop="15px">
-            <GenresList />
+            <GenresList
+              onSelectGenre={handleOnSelectGenre} // passing 'onSelectGenre' as prop which is a function 'handleOnSelectGenre' to fetch 'genre' value from 'GenreList' component
+            />
           </GridItem>
         </Show>
 
         <GridItem area="main" paddingTop="15px">
-          <GameGrid />
+          <GameGrid
+            selectedGenre={selectedGenre} // passing 'selectedGenre' as prop with current value of 'selectedGenre' to 'GameGrid' component
+          />
         </GridItem>
       </Grid>
     </>
