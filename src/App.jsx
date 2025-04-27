@@ -1,15 +1,15 @@
-import { Button, Grid, GridItem, Show } from "@chakra-ui/react";
+import { Box, Button, Grid, GridItem, Show } from "@chakra-ui/react";
 import Navbar from "./components/Navbar";
 import GameGrid from "./components/GameGrid";
 import GenresList from "./components/GenresList";
 import "./App.css";
 import { useState, useEffect } from "react";
+import PlatformSelector from "./components/PlatformSelector";
 
 function App() {
   const [selectedGenre, setSelectedGenre] = useState(null);
 
   useEffect(() => {
-    // Current Selected Genre value is consoled, only when 'selectedGenre' value is updated
     console.log("Current Selected Genre (after update):", selectedGenre);
   }, [selectedGenre]);
 
@@ -30,12 +30,18 @@ function App() {
           <GridItem area="aside" paddingTop="15px">
             <GenresList
               onSelectGenre={handleOnSelectGenre}
-              selectedGenre={selectedGenre} // passing current value of 'selectedGenre' as a prop
+              selectedGenre={selectedGenre}
             />
           </GridItem>
         </Show>
 
         <GridItem area="main" paddingTop="15px">
+          <Box
+            marginBottom={4} // 'Box' is a generic component like 'div'
+          >
+            <PlatformSelector // Calling 'PlatformSelector' in 'main' area
+            />
+          </Box>
           <GameGrid selectedGenre={selectedGenre} />
         </GridItem>
       </Grid>
