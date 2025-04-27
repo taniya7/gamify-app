@@ -9,20 +9,27 @@ import {
 import useFetchData from "../customHooks/useFetchData";
 import { BsChevronDown } from "react-icons/bs";
 
-function PlatformSelector() {
-  const { data, error } = useFetchData("/platforms/lists/parents"); // Fetching data from parent platforms
+function PlatformSelector({ onSelectPlatform, selectedPlatform }) {
+  // taking 'onSelectPlatform' and 'selectedPlatform' as props
+  const { data, error } = useFetchData("/platforms/lists/parents");
 
-  if (error) return null; // if 'error' contains value then return nothing
+  if (error) return null;
   return (
-    // if 'error' does not contains any value then return <Menu>
     <>
       <Menu>
         <MenuButton as={Button} rightIcon={<BsChevronDown />}>
-          Platforms
+          {
+            selectedPlatform?.name || "Platforms" // Changing text of Menu Button to selected platform
+          }
         </MenuButton>
         <MenuList>
           {data.map((platform) => (
-            <MenuItem key={platform.id}>{platform.name}</MenuItem>
+            <MenuItem
+              key={platform.id}
+              onClick={() => onSelectPlatform(platform)} // passing 'platform' object to prop 'onSelectPlatform'
+            >
+              {platform.name}
+            </MenuItem>
           ))}
         </MenuList>
       </Menu>

@@ -8,14 +8,22 @@ import PlatformSelector from "./components/PlatformSelector";
 
 function App() {
   const [selectedGenre, setSelectedGenre] = useState(null);
+  const [selectedPlatform, setSelectedPlatform] = useState(null);
 
   useEffect(() => {
     console.log("Current Selected Genre (after update):", selectedGenre);
-  }, [selectedGenre]);
+    console.log("Current Selected Platform (after update):", selectedPlatform); // Current selected Platform value is consoled, only when 'selectedPlatform' value is updated
+  }, [selectedGenre, selectedPlatform]);
 
   function handleOnSelectGenre(genre) {
     setSelectedGenre(genre);
   }
+
+  function handleOnSelectPlatform(platform) {
+    // Defining 'handleOnSelectPlatform' function
+    setSelectedPlatform(platform);
+  }
+
   return (
     <>
       <Grid
@@ -36,13 +44,16 @@ function App() {
         </Show>
 
         <GridItem area="main" paddingTop="15px">
-          <Box
-            marginBottom={4} // 'Box' is a generic component like 'div'
-          >
-            <PlatformSelector // Calling 'PlatformSelector' in 'main' area
+          <Box marginBottom={4}>
+            <PlatformSelector
+              onSelectPlatform={handleOnSelectPlatform} // Passing 'onSelectPlatform' as prop which is a function 'handleOnSelectPlatform' to fetch 'platform' value from 'PlatformSelector' component
+              selectedPlatform={selectedPlatform} // Passing 'selectedPlatform' as prop to 'PlatformSelector' component to handle clicked effect
             />
           </Box>
-          <GameGrid selectedGenre={selectedGenre} />
+          <GameGrid
+            selectedGenre={selectedGenre}
+            selectedPlatform={selectedPlatform} // Passing 'selectedPlatform' as prop with current value  to 'GameGrid' component to pass selected platform id as query string with endpoint
+          />
         </GridItem>
       </Grid>
     </>
