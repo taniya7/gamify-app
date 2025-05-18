@@ -3,12 +3,18 @@ import useFetchData from "../customHooks/useFetchData";
 import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 
-function GameGrid({ selectedGenre, selectedPlatform }) {
+function GameGrid({ queryString }) {
+  // calling 'queryString' as prop containing 'genre' and 'platform'
   const { data, error, isLoading } = useFetchData(
     // Passing 3 parameters to 'useFetchData' function
     "/games", // endpoint
-    { params: { genres: selectedGenre?.id, platforms: selectedPlatform?.id } }, // axios params as '?platforms=id' only when 'selectedPlatform' contains a valid value
-    [selectedGenre?.id, selectedPlatform?.id] // 'useEffect' dependencies
+    {
+      params: {
+        genres: queryString.genre?.id,
+        platforms: queryString.platform?.id,
+      },
+    }, // axios params
+    [queryString] // 'useEffect' dependencies
   );
 
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8];

@@ -9,8 +9,9 @@ import {
 import useFetchData from "../customHooks/useFetchData";
 import { BsChevronDown } from "react-icons/bs";
 
+// 'onSelectPlatform' prop is called to send selected 'platform' value
+// 'selectedPlatform' prop is called to receive selected 'platform' value
 function PlatformSelector({ onSelectPlatform, selectedPlatform }) {
-  // taking 'onSelectPlatform' and 'selectedPlatform' as props
   const { data, error } = useFetchData("/platforms/lists/parents");
 
   if (error) return null;
@@ -19,14 +20,14 @@ function PlatformSelector({ onSelectPlatform, selectedPlatform }) {
       <Menu>
         <MenuButton as={Button} rightIcon={<BsChevronDown />}>
           {
-            selectedPlatform?.name || "Platforms" // Changing text of Menu Button to selected platform
+            selectedPlatform?.name || "Platforms" // selected 'platform' value is received from 'selectedPlatform prop'
           }
         </MenuButton>
         <MenuList>
           {data.map((platform) => (
             <MenuItem
               key={platform.id}
-              onClick={() => onSelectPlatform(platform)} // passing 'platform' object to prop 'onSelectPlatform'
+              onClick={() => onSelectPlatform(platform)} // selected 'platform' value is passed to 'onSelectPlatform prop'
             >
               {platform.name}
             </MenuItem>

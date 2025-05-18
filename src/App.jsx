@@ -1,4 +1,4 @@
-import { Box, Button, Grid, GridItem, Show } from "@chakra-ui/react";
+import { Box, Button, Grid, GridItem, HStack, Show } from "@chakra-ui/react";
 import Navbar from "./components/Navbar";
 import GameGrid from "./components/GameGrid";
 import GenresList from "./components/GenresList";
@@ -7,28 +7,32 @@ import { useState, useEffect } from "react";
 import PlatformSelector from "./components/PlatformSelector";
 
 function App() {
-  const [selectedGenre, setSelectedGenre] = useState(null);
-  const [selectedPlatform, setSelectedPlatform] = useState(null);
+  const [queryString, setQueryString] = useState({}); // initially empty
+  /* 
+  queryString = {
+  genre : {},
+  platform : {},  
+  }
+  */
 
+  // 'queryString' object will be consoled whenever it will be updated
   useEffect(() => {
-    console.log("Current Selected Genre (after update):", selectedGenre);
-    console.log("Current Selected Platform (after update):", selectedPlatform); // Current selected Platform value is consoled, only when 'selectedPlatform' value is updated
-  }, [selectedGenre, selectedPlatform]);
+    console.log("Current Selected Field (after update):", queryString);
+  }, [queryString]);
 
   function handleOnSelectGenre(genre) {
-    setSelectedGenre(genre);
+    setQueryString({ ...queryString, genre }); // spreading existing 'queryString' object as it is and adding selected 'genre' object into it
   }
 
   function handleOnSelectPlatform(platform) {
-    // Defining 'handleOnSelectPlatform' function
-    setSelectedPlatform(platform);
+    setQueryString({ ...queryString, platform }); // spreading existing 'queryString' object as it is and adding selected 'platform' object into it
   }
 
   return (
     <>
       <Grid
         templateAreas={{ base: `"nav" "main"`, lg: `"nav nav" "aside main"` }}
-        templateColumns={{ base: "1fr", lg: "200px 1fr" }}
+        templateColumns={{ base: "1fr", lg: "240px 1fr" }}
       >
         <GridItem area="nav">
           <Navbar />
@@ -38,21 +42,20 @@ function App() {
           <GridItem area="aside" paddingTop="15px">
             <GenresList
               onSelectGenre={handleOnSelectGenre}
-              selectedGenre={selectedGenre}
+              selectedGenre={queryString.genre} // queryString = {genre : {}, platform : {}}
             />
           </GridItem>
         </Show>
 
         <GridItem area="main" paddingTop="15px">
-          <Box marginBottom={4}>
+          <HStack marginBottom={5} spacing={5}>
             <PlatformSelector
-              onSelectPlatform={handleOnSelectPlatform} // Passing 'onSelectPlatform' as prop which is a function 'handleOnSelectPlatform' to fetch 'platform' value from 'PlatformSelector' component
-              selectedPlatform={selectedPlatform} // Passing 'selectedPlatform' as prop to 'PlatformSelector' component to handle clicked effect
+              onSelectPlatform={handleOnSelectPlatform}
+              selectedPlatform={queryString.platform} // queryString = {genre : {}, platform : {}}
             />
-          </Box>
+          </HStack>
           <GameGrid
-            selectedGenre={selectedGenre}
-            selectedPlatform={selectedPlatform} // Passing 'selectedPlatform' as prop with current value  to 'GameGrid' component to pass selected platform id as query string with endpoint
+            queryString={queryString} // entire updated 'queryString' object is passed containing ‘genre’ and ‘platform’ objects
           />
         </GridItem>
       </Grid>
