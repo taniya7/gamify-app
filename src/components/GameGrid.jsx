@@ -4,7 +4,6 @@ import GameCard from "./GameCard";
 import GameCardSkeleton from "./GameCardSkeleton";
 
 function GameGrid({ queryString }) {
-  // calling 'queryString' as prop containing 'genre' and 'platform'
   const { data, error, isLoading } = useFetchData(
     // Passing 3 parameters to 'useFetchData' function
     "/games", // endpoint

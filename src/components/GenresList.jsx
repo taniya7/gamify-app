@@ -9,8 +9,6 @@ import {
 import useFetchData from "../customHooks/useFetchData";
 import CropImage from "../services/CropImage";
 
-// 'onSelectGenre' prop is called to send selected 'genre' value
-// 'selectedGenre' prop is called to receive selected 'genre' value
 function GenresList({ onSelectGenre, selectedGenre }) {
   const { data, error, isLoading } = useFetchData("/genres");
   return (
@@ -28,8 +26,8 @@ function GenresList({ onSelectGenre, selectedGenre }) {
               />
               <Button
                 variant="link"
-                onClick={() => onSelectGenre(genre)} // selected 'genre' value is passed to 'onSelectGenre prop'
-                fontWeight={genre.id === selectedGenre?.id ? "bold" : "normal"} // selected 'genre' value is received from 'selectedGenre prop'
+                onClick={() => onSelectGenre(genre)}
+                fontWeight={genre.id === selectedGenre?.id ? "bold" : "normal"}
               >
                 {genre.name}
               </Button>

@@ -7,25 +7,18 @@ import { useState, useEffect } from "react";
 import PlatformSelector from "./components/PlatformSelector";
 
 function App() {
-  const [queryString, setQueryString] = useState({}); // initially empty
-  /* 
-  queryString = {
-  genre : {},
-  platform : {},  
-  }
-  */
+  const [queryString, setQueryString] = useState({});
 
-  // 'queryString' object will be consoled whenever it will be updated
   useEffect(() => {
     console.log("Current Selected Field (after update):", queryString);
   }, [queryString]);
 
   function handleOnSelectGenre(genre) {
-    setQueryString({ ...queryString, genre }); // spreading existing 'queryString' object as it is and adding selected 'genre' object into it
+    setQueryString({ ...queryString, genre });
   }
 
   function handleOnSelectPlatform(platform) {
-    setQueryString({ ...queryString, platform }); // spreading existing 'queryString' object as it is and adding selected 'platform' object into it
+    setQueryString({ ...queryString, platform });
   }
 
   return (
@@ -42,21 +35,24 @@ function App() {
           <GridItem area="aside" paddingTop="15px">
             <GenresList
               onSelectGenre={handleOnSelectGenre}
-              selectedGenre={queryString.genre} // queryString = {genre : {}, platform : {}}
+              selectedGenre={queryString.genre}
             />
           </GridItem>
         </Show>
 
         <GridItem area="main" paddingTop="15px">
-          <HStack marginBottom={5} spacing={5}>
+          <HStack
+            marginBottom={5}
+            spacing={5} // Merging both 'PlatformSelector' and 'SortSelector' in HStack
+          >
             <PlatformSelector
               onSelectPlatform={handleOnSelectPlatform}
-              selectedPlatform={queryString.platform} // queryString = {genre : {}, platform : {}}
+              selectedPlatform={queryString.platform}
             />
+            <SortSelector />
           </HStack>
-          <GameGrid
-            queryString={queryString} // entire updated 'queryString' object is passed containing ‘genre’ and ‘platform’ objects
-          />
+
+          <GameGrid queryString={queryString} />
         </GridItem>
       </Grid>
     </>
