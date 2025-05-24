@@ -23,7 +23,6 @@ function App() {
   }
 
   function handleOnSelectSortOrder(sortOrder) {
-    // 3. updating current selected value of 'sortOrder' in 'queryString' object
     setQueryString({ ...queryString, sortOrder });
   }
   return (
@@ -52,8 +51,8 @@ function App() {
               selectedPlatform={queryString.platform}
             />
             <SortSelector
-              onSelectSortOrder={handleOnSelectSortOrder} // 1. sending 'onSelectSortOrder' as prop to get selected value of 'sortOrder' from 'SortSelector' component
-              selectedSortOrder={queryString.sortOrder} // 4. passing current selected value of 'sortOrder' to 'SortSelector' component
+              onSelectSortOrder={handleOnSelectSortOrder}
+              selectedSortOrder={queryString.sortOrder}
             />
           </HStack>
 
