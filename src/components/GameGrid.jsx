@@ -11,6 +11,7 @@ function GameGrid({ queryString }) {
       params: {
         genres: queryString.genre?.id,
         platforms: queryString.platform?.id,
+        ordering: queryString.sortOrder, // here, 'ordering' is the query paramater specified by api endpoint in RAWG website and 'queryString.sortOrder' is the value sent by us to fetch data in particular order from endpoint
       },
     }, // axios params
     [queryString] // 'useEffect' dependencies

@@ -5,6 +5,7 @@ import GenresList from "./components/GenresList";
 import "./App.css";
 import { useState, useEffect } from "react";
 import PlatformSelector from "./components/PlatformSelector";
+import SortSelector from "./components/SortSelector";
 
 function App() {
   const [queryString, setQueryString] = useState({});
@@ -21,6 +22,10 @@ function App() {
     setQueryString({ ...queryString, platform });
   }
 
+  function handleOnSelectSortOrder(sortOrder) {
+    // 3. updating current selected value of 'sortOrder' in 'queryString' object
+    setQueryString({ ...queryString, sortOrder });
+  }
   return (
     <>
       <Grid
@@ -41,15 +46,15 @@ function App() {
         </Show>
 
         <GridItem area="main" paddingTop="15px">
-          <HStack
-            marginBottom={5}
-            spacing={5} // Merging both 'PlatformSelector' and 'SortSelector' in HStack
-          >
+          <HStack marginBottom={5} spacing={5}>
             <PlatformSelector
               onSelectPlatform={handleOnSelectPlatform}
               selectedPlatform={queryString.platform}
             />
-            <SortSelector />
+            <SortSelector
+              onSelectSortOrder={handleOnSelectSortOrder} // 1. sending 'onSelectSortOrder' as prop to get selected value of 'sortOrder' from 'SortSelector' component
+              selectedSortOrder={queryString.sortOrder} // 4. passing current selected value of 'sortOrder' to 'SortSelector' component
+            />
           </HStack>
 
           <GameGrid queryString={queryString} />
