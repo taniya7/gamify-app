@@ -14,10 +14,7 @@ function GenresList({ onSelectGenre, selectedGenre }) {
   const { data, error, isLoading } = useFetchData("/genres");
   return (
     <>
-      <Heading
-        fontSize="25px"
-        paddingY={3} // adding heading to 'GenreList'
-      >
+      <Heading fontSize="25px" paddingY={3}>
         Genre
       </Heading>
 
@@ -31,7 +28,7 @@ function GenresList({ onSelectGenre, selectedGenre }) {
               <Image
                 boxSize="45px"
                 borderRadius="5px"
-                objectFit="cover" // image will be scaled w.r.t its container while preserving the aspect ratio
+                objectFit="cover"
                 src={CropImage(genre.image_background)}
               />
               <Button
@@ -39,12 +36,11 @@ function GenresList({ onSelectGenre, selectedGenre }) {
                 onClick={() => onSelectGenre(genre)}
                 fontWeight={genre.id === selectedGenre?.id ? "bold" : "normal"}
                 textDecoration={
-                  // adding another UI change when 'genre' is selected
                   genre.id === selectedGenre?.id ? "underline" : "normal"
                 }
-                fontSize="lg" // setting large font
-                whiteSpace="normal" // text can wrap up to other line
-                textAlign="left" // aliging text to left
+                fontSize="lg"
+                whiteSpace="normal"
+                textAlign="left"
               >
                 {genre.name}
               </Button>

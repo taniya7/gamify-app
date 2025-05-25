@@ -41,11 +41,7 @@ function App() {
         </GridItem>
 
         <Show above="lg">
-          <GridItem
-            area="aside"
-            paddingTop="15px"
-            marginRight={5} // adding 'marginRight' to keep some space between 'aside' and 'main'
-          >
+          <GridItem area="aside" paddingTop="15px" marginRight={5}>
             <GenresList
               onSelectGenre={handleOnSelectGenre}
               selectedGenre={queryString.genre}
