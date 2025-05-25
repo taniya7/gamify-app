@@ -9,31 +9,28 @@ import { useRef } from "react";
 import { BsSearch } from "react-icons/bs";
 
 function SearchBar({ onSearch }) {
-  const searchRef = useRef(null); // using 'useRef' to track 'searchText' value
+  const searchRef = useRef(null);
 
   function handleSearch(event) {
     event.preventDefault();
-    if (searchRef.current) onSearch(searchRef.current.value); // 3. passing current user input as 'searchText' to 'App' component via 'Prop Wiring'
+    if (searchRef.current) onSearch(searchRef.current.value);
   }
   return (
     <>
-      <form
-        onSubmit={handleSearch} // when pressed 'Enter', user input is submitted and passed to 'handleSearch' for further operation
-        style={{ width: "100%", margin: "20px" }}
-      >
+      <form onSubmit={handleSearch} style={{ width: "100%", margin: "20px" }}>
         <InputGroup>
           <InputLeftElement
             children={<BsSearch />}
             as={Button}
             variant="unstyled"
-            onClick={handleSearch} // when 'BsSearch' icon is clicked, user input is submitted and passed to 'handleSearch' for further operation
+            onClick={handleSearch}
           />
 
           <Input
             variant="filled"
             placeholder="Search Games..."
             borderRadius={20}
-            ref={searchRef} // assigning user input value to 'searchRef'
+            ref={searchRef}
           />
         </InputGroup>
       </form>

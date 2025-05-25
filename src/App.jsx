@@ -6,6 +6,7 @@ import "./App.css";
 import { useState, useEffect } from "react";
 import PlatformSelector from "./components/PlatformSelector";
 import SortSelector from "./components/SortSelector";
+import GameHeading from "./components/GameHeading";
 
 function App() {
   const [queryString, setQueryString] = useState({});
@@ -27,7 +28,6 @@ function App() {
   }
 
   function handleOnSearch(searchText) {
-    // 4. updating current 'searchText' value in 'queryString' object using 'handleOnSearch' function
     setQueryString({ ...queryString, searchText });
   }
   return (
@@ -37,9 +37,7 @@ function App() {
         templateColumns={{ base: "1fr", lg: "240px 1fr" }}
       >
         <GridItem area="nav">
-          <Navbar
-            onSearch={handleOnSearch} // 1. passing 'onSearch' as prop to 'Navbar' component
-          />
+          <Navbar onSearch={handleOnSearch} />
         </GridItem>
 
         <Show above="lg">
@@ -52,7 +50,10 @@ function App() {
         </Show>
 
         <GridItem area="main" paddingTop="15px">
-          <HStack marginBottom={5} spacing={5}>
+          <GameHeading
+            queryString={queryString} // passing 'queryString' as prop to 'GameHeading' component
+          />
+          <HStack marginBottom={10} spacing={5}>
             <PlatformSelector
               onSelectPlatform={handleOnSelectPlatform}
               selectedPlatform={queryString.platform}
@@ -63,9 +64,7 @@ function App() {
             />
           </HStack>
 
-          <GameGrid
-            queryString={queryString} // 5. passing updated 'querString' object with current 'searchText' value to 'GameGrid' component in order to fetch filtered games using 'queryString' and display on 'GameGrid'
-          />
+          <GameGrid queryString={queryString} />
         </GridItem>
       </Grid>
     </>

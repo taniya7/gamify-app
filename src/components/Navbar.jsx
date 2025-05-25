@@ -8,9 +8,7 @@ function Navbar({ onSearch }) {
     <>
       <HStack>
         <Image src={logo} boxSize="80px" borderRadius={10} />
-        <SearchBar
-          onSearch={onSearch} // 2. passing same 'onSearch' prop to 'SearchBar' component
-        />
+        <SearchBar onSearch={onSearch} />
         <ColorModeSwitch />
       </HStack>
     </>
@@ -18,8 +16,3 @@ function Navbar({ onSearch }) {
 }
 
 export default Navbar;
-
-/*
-'onSearch' on the left is the prop name you're passing to SearchBar. 
-'onSearch' on the right is the function reference(variable) of 'handleOnSearch', defined in the parent component (App).
-*/
