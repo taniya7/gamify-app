@@ -41,7 +41,11 @@ function App() {
         </GridItem>
 
         <Show above="lg">
-          <GridItem area="aside" paddingTop="15px">
+          <GridItem
+            area="aside"
+            paddingTop="15px"
+            marginRight={5} // adding 'marginRight' to keep some space between 'aside' and 'main'
+          >
             <GenresList
               onSelectGenre={handleOnSelectGenre}
               selectedGenre={queryString.genre}
@@ -50,9 +54,7 @@ function App() {
         </Show>
 
         <GridItem area="main" paddingTop="15px">
-          <GameHeading
-            queryString={queryString} // passing 'queryString' as prop to 'GameHeading' component
-          />
+          <GameHeading queryString={queryString} />
           <HStack marginBottom={10} spacing={5}>
             <PlatformSelector
               onSelectPlatform={handleOnSelectPlatform}
