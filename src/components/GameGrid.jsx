@@ -5,24 +5,30 @@ import GameCardSkeleton from "./GameCardSkeleton";
 
 function GameGrid({ queryString }) {
   const { data, error, isLoading } = useFetchData(
-    // Passing 3 parameters to 'useFetchData' function
-    "/games", // endpoint
+    "/games",
     {
       params: {
         genres: queryString.genre?.id,
         platforms: queryString.platform?.id,
         ordering: queryString.sortOrder,
-        search: queryString.searchText, // here, 'search' is the query paramater specified by api endpoint and 'queryString.searchText' is the value sent by us to fetch data from endpoint
+        search: queryString.searchText,
       },
-    }, // axios params
-    [queryString] // 'useEffect' dependencies
+    },
+    [queryString]
   );
 
   const skeletons = [1, 2, 3, 4, 5, 6, 7, 8];
 
+  {
+    error && <Text>{error}</Text>;
+  } // error will not be rendered on UI
+
   return (
     <>
-      {error && <Text>{error}</Text>}
+      {
+        error && <Text>{error}</Text> // error will be rendered on UI
+      }
+
       <SimpleGrid columns={{ sm: 1, md: 2, lg: 3, xl: 4 }} spacing={7}>
         {isLoading &&
           skeletons.map((skeleton) => <GameCardSkeleton key={skeleton} />)}
