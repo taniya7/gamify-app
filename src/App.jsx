@@ -25,6 +25,11 @@ function App() {
   function handleOnSelectSortOrder(sortOrder) {
     setQueryString({ ...queryString, sortOrder });
   }
+
+  function handleOnSearch(searchText) {
+    // 4. updating current 'searchText' value in 'queryString' object using 'handleOnSearch' function
+    setQueryString({ ...queryString, searchText });
+  }
   return (
     <>
       <Grid
@@ -32,7 +37,9 @@ function App() {
         templateColumns={{ base: "1fr", lg: "240px 1fr" }}
       >
         <GridItem area="nav">
-          <Navbar />
+          <Navbar
+            onSearch={handleOnSearch} // 1. passing 'onSearch' as prop to 'Navbar' component
+          />
         </GridItem>
 
         <Show above="lg">
@@ -56,7 +63,9 @@ function App() {
             />
           </HStack>
 
-          <GameGrid queryString={queryString} />
+          <GameGrid
+            queryString={queryString} // 5. passing updated 'querString' object with current 'searchText' value to 'GameGrid' component in order to fetch filtered games using 'queryString' and display on 'GameGrid'
+          />
         </GridItem>
       </Grid>
     </>
