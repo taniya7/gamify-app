@@ -19,10 +19,7 @@ function GameCard({ game }) {
               <CriticScore score={game.metacritic} />
             </HStack>
             <Heading fontSize={"xl"}>
-              {game.name}{" "}
-              <RatingEmoji
-                rating={game.rating_top} // passing 'rating' as prop with value 'game.rating_top'
-              />
+              {game.name} <RatingEmoji rating={game.rating_top} />
             </Heading>
           </CardBody>
         </Card>

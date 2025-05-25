@@ -7,19 +7,22 @@ import {
   ListItem,
   Spinner,
 } from "@chakra-ui/react";
-import useFetchData from "../customHooks/useFetchData";
+
 import CropImage from "../services/CropImage";
+import genreData from "../data/genreData"; // importing 'genreData'
 
 function GenresList({ onSelectGenre, selectedGenre }) {
-  const { data, error, isLoading } = useFetchData("/genres");
+  // const { data, error, isLoading } = useFetchData("/genres");
+  const data = genreData; // using 'genreData' as static data
+
   return (
     <>
       <Heading fontSize="25px" paddingY={3}>
         Genre
       </Heading>
 
-      {error && null}
-      {isLoading && <Spinner />}
+      {/* {error && null}
+      {isLoading && <Spinner />} */}
 
       <List>
         {data.map((genre) => (

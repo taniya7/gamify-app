@@ -6,13 +6,16 @@ import {
   MenuList,
   Text,
 } from "@chakra-ui/react";
-import useFetchData from "../customHooks/useFetchData";
+
 import { BsChevronDown } from "react-icons/bs";
+import platformData from "../data/platformData"; // importing 'platformData'
 
 function PlatformSelector({ onSelectPlatform, selectedPlatform }) {
-  const { data, error } = useFetchData("/platforms/lists/parents");
+  // const { data, error } = useFetchData("/platforms/lists/parents");
+  // if (error) return null;
 
-  if (error) return null;
+  const data = platformData; // using 'platformData' as static data
+
   return (
     <>
       <Menu>
