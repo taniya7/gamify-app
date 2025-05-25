@@ -8,13 +8,10 @@ import {
 } from "@chakra-ui/react";
 
 import { BsChevronDown } from "react-icons/bs";
-import platformData from "../data/platformData"; // importing 'platformData'
+import platformData from "../data/platformData";
 
 function PlatformSelector({ onSelectPlatform, selectedPlatform }) {
-  // const { data, error } = useFetchData("/platforms/lists/parents");
-  // if (error) return null;
-
-  const data = platformData; // using 'platformData' as static data
+  const data = platformData;
 
   return (
     <>

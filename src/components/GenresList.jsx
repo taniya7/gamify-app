@@ -9,20 +9,16 @@ import {
 } from "@chakra-ui/react";
 
 import CropImage from "../services/CropImage";
-import genreData from "../data/genreData"; // importing 'genreData'
+import genreData from "../data/genreData";
 
 function GenresList({ onSelectGenre, selectedGenre }) {
-  // const { data, error, isLoading } = useFetchData("/genres");
-  const data = genreData; // using 'genreData' as static data
+  const data = genreData;
 
   return (
     <>
       <Heading fontSize="25px" paddingY={3}>
-        Genre
+        Genres
       </Heading>
-
-      {/* {error && null}
-      {isLoading && <Spinner />} */}
 
       <List>
         {data.map((genre) => (
