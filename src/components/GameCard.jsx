@@ -3,10 +3,9 @@ import PlatformIconsList from "./PlatformIconsList";
 import CriticScore from "./CriticScore";
 import CropImage from "../services/CropImage";
 import GameCardContainer from "./GameCardContainer";
+import RatingEmoji from "./RatingEmoji";
 
 function GameCard({ game }) {
-  // Moved Game Heading below Hstack
-  // Added paddingBottom to Hstack to add space between Game Heading and Platform Icons
   return (
     <>
       <GameCardContainer>
@@ -19,7 +18,12 @@ function GameCard({ game }) {
               />
               <CriticScore score={game.metacritic} />
             </HStack>
-            <Heading fontSize={"xl"}>{game.name}</Heading>
+            <Heading fontSize={"xl"}>
+              {game.name}{" "}
+              <RatingEmoji
+                rating={game.rating_top} // passing 'rating' as prop with value 'game.rating_top'
+              />
+            </Heading>
           </CardBody>
         </Card>
       </GameCardContainer>

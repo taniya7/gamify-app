@@ -6,7 +6,7 @@ function GameHeading({ queryString }) {
   } Games`;
   return (
     <>
-      <Heading as="h1" marginBottom={4} fontSize="5xl">
+      <Heading as="h1" marginBottom={4} fontSize="6xl">
         {heading}
       </Heading>
     </>
