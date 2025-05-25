@@ -6,7 +6,11 @@ function ColorModeSwitch() {
     <>
       <HStack>
         <Switch isChecked={colorMode == "dark"} onChange={toggleColorMode} />
-        <Text>{colorMode == "dark" ? "Dark" : "Light"} Mode</Text>
+        <Text
+          whiteSpace="nowrap" // 'nowrap' restricts text to come down to another line
+        >
+          {colorMode == "dark" ? "Dark" : "Light"} Mode
+        </Text>
       </HStack>
     </>
   );
